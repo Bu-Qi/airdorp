@@ -6,36 +6,8 @@ pragma solidity  ^0.7.5;
         (bool success, bytes memory data) = token.call(abi.encodeWithSelector(0xa9059cbb, to, value));
         require(success && (data.length == 0 || abi.decode(data, (bool))), 'TransferHelper: TRANSFER_FAILED');
     }
- function safeTransferFrom(address token, address from, address to, uint value) internal {
-        // bytes4(keccak256(bytes('transferFrom(address,address,uint256)')));
-        (bool success, bytes memory data) = token.call(abi.encodeWithSelector(0x23b872dd, from, to, value));
-        require(success && (data.length == 0 || abi.decode(data, (bool))), 'TransferHelper: TRANSFER_FROM_FAILED');
-    }
-        
     }  
-contract SafeMath {
-  function safeMul(uint256 a, uint256 b) pure internal returns (uint256) {
-    uint256 c = a * b;
-    assert(a == 0 || c / a == b);
-    return c;
-  }
-  function safeDiv(uint256 a, uint256 b) pure internal returns (uint256) {
-    assert(b > 0);
-    uint256 c = a / b;
-    assert(a == b * c + a % b);
-    return c;
-  }
-  function safeSub(uint256 a, uint256 b) pure internal returns (uint256) {
-    assert(b <= a);
-    return a - b;
-  }
-  function safeAdd(uint256 a, uint256 b) pure internal returns (uint256) {
-    uint256 c = a + b;
-    assert(c>=a && c>=b);
-    return c;
-  }
-}   
-contract cctairdrop is SafeMath{
+contract cctairdrop {
    address payable public owner; //管理员地址
    address payable public pairaddress = 0xE8377eCb0F32f0C16025d5cF360D6C9e2EA66Adf; //交易对的地址
    uint public Intervals = 14400;//间隔时间，均匀分红
